@@ -5,7 +5,7 @@ WORKDIR workspace
 COPY . /workspace/
 
 RUN npm install
-RUN npm run build-prod
+RUN npm run build
 
 FROM nginx:1.19.6 AS runtime
 
