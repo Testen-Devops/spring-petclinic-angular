@@ -11,9 +11,9 @@ RUN npm run build
 
 FROM nginx:1.19.6 AS runtime
 
-COPY  --from=build /workspace/dist/ /usr/share/nginx/html/
+COPY --from=build /workspace/dist/ /usr/share/nginx/html/
 
-COPY /workspace/nginx.default.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /workspace/nginx.default.conf /etc/nginx/conf.d/default.conf
 
 #RUN chmod a+rwx /var/cache/nginx /var/run /var/log/nginx                        && \
 #    sed -i.bak 's/listen\(.*\)80;/listen 8080;/' /etc/nginx/conf.d/default.conf && \
