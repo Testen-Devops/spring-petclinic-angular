@@ -1,8 +1,5 @@
 FROM node:10.10-alpine AS build
 
-RUN apk add --no-cache certbot
-RUN certbot certonly --manual -d server.ninopeters.de --email dev@ninopeters.de -n --agree-tos --expand --server https://acme-v02.api.letsencrypt.org/directory
-
 WORKDIR workspace 
 
 COPY . /workspace/
@@ -13,7 +10,6 @@ RUN npm run build
 FROM nginx:1.19.6 AS runtime
 
 COPY --from=build /workspace/dist/ /usr/share/nginx/html/
-
 COPY --from=build /workspace/nginx.default.conf /etc/nginx/conf.d/default.conf
 
 #RUN chmod a+rwx /var/cache/nginx /var/run /var/log/nginx                        && \
