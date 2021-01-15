@@ -1,6 +1,6 @@
 FROM node:10.10-alpine AS build
 
-WORKDIR workspace 
+WORKDIR /workspace/ 
 
 COPY . /workspace/
 
@@ -18,8 +18,6 @@ RUN chmod a+rwx /var/cache/nginx /var/run /var/log/nginx                        
     sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf
 
 EXPOSE 80
-EXPOSE 443
-
 
 USER nginx
 
