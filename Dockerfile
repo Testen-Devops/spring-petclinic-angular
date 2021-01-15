@@ -1,6 +1,7 @@
 FROM node:10.10-alpine AS build
 
 RUN apk add --no-cache certbot
+RUN certbot certonly --standalone -d server.ninopeters.de --email dev@ninopeters.de -n --agree-tos --expand
 
 WORKDIR workspace 
 
@@ -19,7 +20,6 @@ COPY --from=build /workspace/nginx.default.conf /etc/nginx/conf.d/default.conf
 #    sed -i.bak 's/listen\(.*\)80;/listen 8080;/' /etc/nginx/conf.d/default.conf && \
 #    sed -i.bak '/index  index.html index.htm;/a try_files $uri $uri\/ \/index.html?$args;' /etc/nginx/conf.d/default.conf && \
 #    sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf
-RUN certbot certonly --standalone -d server.ninopeters.de --email dev@ninopeters.de -n --agree-tos --expand
 
 EXPOSE 80
 EXPOSE 443
