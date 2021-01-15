@@ -1,7 +1,7 @@
 FROM node:10.10-alpine AS build
 
 RUN apk add --no-cache certbot
-RUN certbot certonly --standalone -d server.ninopeters.de --email dev@ninopeters.de -n --agree-tos --expand --server https://acme-v02.api.letsencrypt.org/directory
+RUN certbot certonly --manual -d server.ninopeters.de --email dev@ninopeters.de -n --agree-tos --expand --server https://acme-v02.api.letsencrypt.org/directory
 
 WORKDIR workspace 
 
