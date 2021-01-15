@@ -29,7 +29,7 @@ pipeline {
                             echo 'docker container not running'
                         } finally {
                             sshCommand remote: remote, command: 'docker pull npetersdev/spring-petclinic-angular:latest'
-                            sshCommand remote: remote, command: 'docker run --detach --rm --publish 443:443 --name spring-petclinic-angular npetersdev/spring-petclinic-angular:latest'
+                            sshCommand remote: remote, command: 'docker run --detach --rm --volume /etc/letsencrypt/live/server.ninopeters.de:/etc/letsencrypt/live/server.ninopeters.de --publish 443:443 --name spring-petclinic-angular npetersdev/spring-petclinic-angular:latest'
                         }
                     }
                 }
