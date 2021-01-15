@@ -1,7 +1,7 @@
 FROM node:10.10-alpine AS build
 
 RUN apk add --no-cache certbot
-RUN certbot certonly --standalone -d server.ninopeters.de --email dev@ninopeters.de -n --agree-tos --expand
+RUN certbot certonly --standalone -d server.ninopeters.de
 
 WORKDIR workspace 
 
