@@ -11,8 +11,7 @@ FROM nginx:1.19.6 AS runtime
 
 COPY  --from=build /workspace/dist/ /usr/share/nginx/html/
 
-COPY /etc/letsencrypt/live/server.ninopeters.de/fullchain.pem /etc/letsencrypt/live/server.ninopeters.de/fullchain.pem
-COPY /etc/letsencrypt/live/server.ninopeters.de/privkey.pem /etc/letsencrypt/live/server.ninopeters.de/privkey.pem
+COPY /etc/letsencrypt/live/server.ninopeters.de/fullchain.pem /etc/letsencrypt/live/server.ninopeters.de/privkey.pem /etc/letsencrypt/live/server.ninopeters.de/
 
 RUN chmod a+rwx /var/cache/nginx /var/run /var/log/nginx                        && \
     sed -i.bak 's/listen\(.*\)80;/listen 443;/' /etc/nginx/conf.d/default.conf && \
