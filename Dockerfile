@@ -1,6 +1,6 @@
 FROM node:10.10-alpine AS build
 
-RUN apk add certbot certbot-nginx
+RUN apk add certbot
 
 WORKDIR workspace 
 
