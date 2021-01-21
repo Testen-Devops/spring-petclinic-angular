@@ -13,17 +13,17 @@ pipeline {
                 }
             }
         }
-    stage('Build & Push docker image') {
-        steps {
-            script {
-                def app = docker.build("npetersdev/spring-petclinic-angular")
-                docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                    //app.push("${env.BUILD_NUMBER}")
-                    app.push("latest")
-                }
-            }
-        }
-    }
+    // stage('Build & Push docker image') {
+    //     steps {
+    //         script {
+    //             def app = docker.build("npetersdev/spring-petclinic-angular")
+    //             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+    //                 //app.push("${env.BUILD_NUMBER}")
+    //                 app.push("latest")
+    //             }
+    //         }
+    //     }
+    // }
         stage('Run docker image on remote server') {
             steps {
                 script {
