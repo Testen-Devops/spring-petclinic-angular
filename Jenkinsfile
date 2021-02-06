@@ -10,7 +10,7 @@ pipeline {
                 def app = docker.build("npetersdev/spring-petclinic-angular")
                 echo "Running build ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 sh'docker run --detach --rm --publish 80:80 --publish 443:443 --name spring-petclinic-angular npetersdev/spring-petclinic-angular'
-                def app = docker.build("npetersdev/spring-petclinic-rest")
+                def appBE = docker.build("npetersdev/spring-petclinic-rest")
                 sh 'docker run --detach --rm --publish 9966:9966 --name spring-petclinic-rest npetersdev/spring-petclinic-rest'
 
                 sh 'npm ci'
