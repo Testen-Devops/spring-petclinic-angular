@@ -30,16 +30,16 @@ stages {
         }
 
         stage('test e2e') {
-            environment {
-                // we will be recording test results and video on Cypress dashboard
-                // to record we need to set an environment variable
-                // we can load the record key variable from credentials store
-                // see https://jenkins.io/doc/book/using/using-credentials/
-                // CYPRESS_RECORD_KEY = credentials('cypress-example-kitchensink-record-key')
-                // because parallel steps share the workspace they might race to delete
-                // screenshots and videos folders. Tell Cypress not to delete these folders
-                // CYPRESS_trashAssetsBeforeRuns = 'false'
-        }
+        //     environment {
+        //         // we will be recording test results and video on Cypress dashboard
+        //         // to record we need to set an environment variable
+        //         // we can load the record key variable from credentials store
+        //         // see https://jenkins.io/doc/book/using/using-credentials/
+        //         // CYPRESS_RECORD_KEY = credentials('cypress-example-kitchensink-record-key')
+        //         // because parallel steps share the workspace they might race to delete
+        //         // screenshots and videos folders. Tell Cypress not to delete these folders
+        //         // CYPRESS_trashAssetsBeforeRuns = 'false'
+        // }
 
         steps {
                 echo "Running build ${env.BUILD_ID}"
@@ -88,10 +88,11 @@ stages {
                     sh 'docker rmi npetersdev/spring-petclinic-angular:latest'
                 }
 
-                always {
-                    echo 'Stopping local server'
-                    sh 'pkill -f http-server'
-                }
+            }
+
+            always {
+                echo 'Stopping local server'
+                sh 'pkill -f http-server'
             }
         }
     }
