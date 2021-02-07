@@ -13,8 +13,9 @@ pipeline {
                         }
                         } catch (err) {
                             echo 'docker container already running'
+                            sh'docker restart spring-petclinic-rest'
                         } finally {
-
+        
                         }
                     }
                     sleep(time:10,unit:"SECONDS")
