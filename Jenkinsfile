@@ -12,8 +12,7 @@ pipeline {
                             }
                         }
                         } catch (err) {
-                            echo 'docker container already running'
-                            sh'docker restart spring-petclinic-rest'
+                            echo 'docker rest-container already running'
                         } finally {
         
                         }
