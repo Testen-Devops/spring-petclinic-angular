@@ -17,5 +17,5 @@ RUN npm i @cypress/webpack-preprocessor
 RUN npm i ts-loader
 # confirm the cypress install
 
-RUN ./node_modules/.bin/cypress verify
+RUN npx cypress verify
         
