@@ -7,12 +7,13 @@ pipeline {
                     script {
                         try {
                             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                            docker.image('npetersdev/spring-petclinic-rest:latest')
+                            docker.image('npetersdev/spring-petclinic-rest:test')
                             .withRun('--detach --rm --publish 9966:9966 --name spring-petclinic-rest'){
                             }
                         }
                         } catch (err) {
                             echo 'docker rest-container already running'
+                            sh'docker restart spring-petclinic-api-test'
                         } finally {
         
                         }
