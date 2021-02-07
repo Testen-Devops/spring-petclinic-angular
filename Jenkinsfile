@@ -4,7 +4,6 @@ pipeline {
         stage('run docker-compose for testing') {
             steps {
                 echo 'Branch:...' + env.GIT_BRANCH
-                sh'npm install'
                     script {
                         try {
                             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
