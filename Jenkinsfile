@@ -5,11 +5,16 @@ pipeline {
             steps {
                 echo 'Branch:...' + env.GIT_BRANCH
                     script {
-                    // sh 'docker run -p 9966:9966 springcommunity/spring-petclinic-rest:latest'
-                        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                        try {
+                            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                             docker.image('npetersdev/spring-petclinic-rest:latest')
                             .withRun('--detach --rm --publish 9966:9966 --name spring-petclinic-rest'){
                             }
+                        }
+                        } catch (err) {
+                            echo 'docker container already running'
+                        } finally {
+
                         }
                     }
                     sleep(time:10,unit:"SECONDS")
