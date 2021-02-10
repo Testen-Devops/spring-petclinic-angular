@@ -41,7 +41,7 @@ pipeline {
                             echo 'docker container not running'
                         } finally {
                             sshCommand remote: remote, command: 'docker pull npetersdev/spring-petclinic-angular:latest'
-                            sshCommand remote: remote, command: 'docker run --detach --rm --publish 3000:3000 --name spring-petclinic-angular npetersdev/spring-petclinic-angular:latest'
+                            sshCommand remote: remote, command: 'docker run --detach --rm --publish 3000:80 --name spring-petclinic-angular npetersdev/spring-petclinic-angular:latest'
                         }
                     }
                 }
