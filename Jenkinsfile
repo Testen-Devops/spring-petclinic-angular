@@ -4,6 +4,7 @@ pipeline {
         stage('Build & Push docker image') {
             steps {
                 script {
+                    echo 'Branch:...' + env.GIT_BRANCH
                     def app = docker.build("npetersdev/spring-petclinic-angular")
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                         //app.push("${env.BUILD_NUMBER}")
@@ -12,6 +13,17 @@ pipeline {
                 }
             }
         }
+    // stage('Build & Push docker image') {
+    //     steps {
+    //         script {
+    //             def app = docker.build("npetersdev/spring-petclinic-angular")
+    //             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+    //                 //app.push("${env.BUILD_NUMBER}")
+    //                 app.push("latest")
+    //             }
+    //         }
+    //     }
+    // }
         stage('Run docker image on remote server') {
             steps {
                 script {
@@ -34,11 +46,12 @@ pipeline {
                     }
                 }
             }
-        }
-        stage('Delete unused docker image') {
-            steps {
-                sh 'docker rmi npetersdev/spring-petclinic-angular:latest'
+            stage('Delete unused docker image') {
+                steps {
+                    sh 'docker rmi npetersdev/spring-petclinic-angular:latest'
+                }
+
             }
         }
     }
-}
+
