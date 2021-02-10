@@ -23,5 +23,5 @@
 
 export const environment = {
   production: false,
-  REST_API_URL: "https://server.ninopeters.de/petclinic/api/",
+  REST_API_URL: "https://pet.ninopeters.de/petclinic/api/",
 };
