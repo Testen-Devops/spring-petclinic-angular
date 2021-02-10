@@ -46,12 +46,12 @@ pipeline {
                     }
                 }
             }
-            stage('Delete unused docker image') {
-                steps {
-                    sh 'docker rmi npetersdev/spring-petclinic-angular:latest'
-                }
-
+        }
+        stage('Delete unused docker image') {
+            steps {
+                sh 'docker rmi npetersdev/spring-petclinic-angular:latest'
             }
+
         }
     }
 
