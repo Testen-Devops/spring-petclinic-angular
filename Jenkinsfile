@@ -1,7 +1,7 @@
 def remote = [:]
 remote.name = 'server'
 remote.host = 'jenkins.ninopeters.de'
-remove.port = 4714
+remote.port = 4714
 remote.user = USERNAME
 remote.password = PASSWORD
 remote.allowAnyHosts = true
