@@ -7,8 +7,8 @@ pipeline {
                     script {
                         try {
                             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                            docker.image('npetersdev/spring-petclinic-rest:test')
-                            .withRun('--detach --rm --publish 9966:9966 --name spring-petclinic-rest'){
+                            docker.image('npetersdev/spring-petclinic-rest:latest')
+                            .withRun('--rm --publish 9966:9966 --name spring-petclinic-rest'){
                             }
                             sh'docker ps'
                         }
