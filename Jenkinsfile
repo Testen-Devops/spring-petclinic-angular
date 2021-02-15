@@ -27,21 +27,31 @@ pipeline {
         stage('Run docker image on remote server A') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'remote-server-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        def remote = [:]
-                        remote.name = 'server'
-                        remote.host = 'jenkins.ninopeters.de'
-                        remote.port = 4714
-                        remote.allowAnyHosts = true
-                        remote.user = USERNAME
-                        remote.password = PASSWORD
+                    //withCredentials([usernamePassword(credentialsId: 'remote-server-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    //    def remote = [:]
+                    //    remote.name = 'server'
+                    //    remote.host = 'jenkins.ninopeters.de'
+                    //    remote.port = 4714
+                    //    remote.allowAnyHosts = true
+                    //    remote.user = USERNAME
+                    //    remote.password = PASSWORD
+                    //    try {
+                    //      sshCommand remote: remote, command: 'docker container stop spring-petclinic-angular-A'
+                    //    } catch (err) {
+                    //        echo 'docker container not running'
+                    //    } finally {
+                    //        sshCommand remote: remote, command: 'docker pull npetersdev/spring-petclinic-angular:latest'
+                    //        sshCommand remote: remote, command: 'docker run --detach --rm --publish 3000:80 --name spring-petclinic-angular-A npetersdev/spring-petclinic-angular:latest'
+                    //    }
+                    //}
+                    sshagent (credentials: ['remote_guest_auth']) {
                         try {
-                          sshCommand remote: remote, command: 'docker container stop spring-petclinic-angular-A'
+                            sh 'docker container stop spring-petclinic-angular-A'
                         } catch (err) {
                             echo 'docker container not running'
                         } finally {
-                            sshCommand remote: remote, command: 'docker pull npetersdev/spring-petclinic-angular:latest'
-                            sshCommand remote: remote, command: 'docker run --detach --rm --publish 3000:80 --name spring-petclinic-angular-A npetersdev/spring-petclinic-angular:latest'
+                            sh 'docker pull npetersdev/spring-petclinic-angular:latest'
+                            sh 'docker run --detach --rm --publish 3000:80 --name spring-petclinic-angular-A npetersdev/spring-petclinic-angular:latest'
                         }
                     }
                 }
@@ -50,21 +60,31 @@ pipeline {
         stage('Run docker image on remote server B') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'remote-server-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        def remote = [:]
-                        remote.name = 'server'
-                        remote.host = 'jenkins.ninopeters.de'
-                        remote.port = 4714
-                        remote.allowAnyHosts = true
-                        remote.user = USERNAME
-                        remote.password = PASSWORD
+                    //withCredentials([usernamePassword(credentialsId: 'remote-server-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    //    def remote = [:]
+                    //    remote.name = 'server'
+                    //    remote.host = 'jenkins.ninopeters.de'
+                    //    remote.port = 4714
+                    //    remote.allowAnyHosts = true
+                    //    remote.user = USERNAME
+                    //    remote.password = PASSWORD
+                    //    try {
+                    //        sshCommand remote: remote, command: 'docker container stop spring-petclinic-angular-B'
+                    //    } catch (err) {
+                    //        echo 'docker container not running'
+                    //    } finally {
+                    //        sshCommand remote: remote, command: 'docker pull npetersdev/spring-petclinic-angular:latest'
+                    //        sshCommand remote: remote, command: 'docker run --detach --rm --publish 3001:80 --name spring-petclinic-angular-B npetersdev/spring-petclinic-angular:latest'
+                    //    }
+                    //}
+                    sshagent (credentials: ['remote_guest_auth']) {
                         try {
-                            sshCommand remote: remote, command: 'docker container stop spring-petclinic-angular-B'
+                            sh 'docker container stop spring-petclinic-angular-B'
                         } catch (err) {
                             echo 'docker container not running'
                         } finally {
-                            sshCommand remote: remote, command: 'docker pull npetersdev/spring-petclinic-angular:latest'
-                            sshCommand remote: remote, command: 'docker run --detach --rm --publish 3001:80 --name spring-petclinic-angular-B npetersdev/spring-petclinic-angular:latest'
+                            sh 'docker pull npetersdev/spring-petclinic-angular:latest'
+                            sh 'docker run --detach --rm --publish 3001:80 --name spring-petclinic-angular-B npetersdev/spring-petclinic-angular:latest'
                         }
                     }
                 }
