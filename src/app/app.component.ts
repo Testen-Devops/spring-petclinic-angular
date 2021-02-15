@@ -22,6 +22,7 @@
 
 import {Component} from '@angular/core';
 import { FormControl, FormBuilder } from '@angular/forms';
+import { SearchService } from './search.service';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +33,7 @@ export class AppComponent {
 
   searchForm;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private searchService: SearchService) {
     this.searchForm = this.formBuilder.group({
       searchInput: new FormControl(''),
     });
@@ -40,7 +41,8 @@ export class AppComponent {
 
   onSubmit() {
     const input = this.searchForm.value.searchInput;
-
-    
+    if (input != "") {
+      this.searchService.getSearchResult(input);
+    }
   }
 }

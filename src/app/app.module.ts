@@ -35,6 +35,8 @@ import {PartsModule} from './parts/parts.module';
 import {SpecialtiesModule} from './specialties/specialties.module';
 import {HttpErrorHandler} from './error.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SearchService } from './search.service';
 
 
 @NgModule({
@@ -42,6 +44,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AppComponent,
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
@@ -57,6 +60,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   ],
   providers: [
     HttpErrorHandler,
+    SearchService
   ],
   bootstrap: [AppComponent]
 })
