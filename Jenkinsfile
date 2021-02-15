@@ -34,7 +34,7 @@ pipeline {
                        remote.port = 4714
                        remote.allowAnyHosts = true
                        remote.user = USERNAME
-                       remote.identityFile = KEYFILE
+                       remote.identifyFile = KEYFILE
                        remote.passphrase = PASSPHRASE
                        try {
                          sshCommand remote: remote, command: 'docker container stop spring-petclinic-angular-A'
@@ -58,7 +58,7 @@ pipeline {
                        remote.port = 4714
                        remote.allowAnyHosts = true
                        remote.user = USERNAME
-                       remote.identityFile = KEYFILE
+                       remote.identifyFile = KEYFILE
                        remote.passphrase = PASSPHRASE
                        try {
                            sshCommand remote: remote, command: 'docker container stop spring-petclinic-angular-B'
