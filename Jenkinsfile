@@ -27,7 +27,7 @@ pipeline {
         stage('Run docker image on remote server A') {
             steps {
                 script {
-                    withCredentials([sshUserPrivateKey(credentialsId: 'remote-guest-auth', keyFileVariable: 'KEYFILE', usernameVariable: 'USERNAME', passphraseVariable: 'PASSPHRASE')]) {
+                    withCredentials([sshUserPrivateKey(credentialsId: 'remote_guest_auth', keyFileVariable: 'KEYFILE', usernameVariable: 'USERNAME', passphraseVariable: 'PASSPHRASE')]) {
                        def remote = [:]
                        remote.host = 'jenkins.ninopeters.de'
                        remote.port = 4714
@@ -50,7 +50,7 @@ pipeline {
         stage('Run docker image on remote server B') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'remote-server-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    withCredentials([sshUserPrivateKey(credentialsId: 'remote_guest_auth', keyFileVariable: 'KEYFILE', usernameVariable: 'USERNAME', passphraseVariable: 'PASSPHRASE')]) {
                        def remote = [:]
                        remote.name = 'server'
                        remote.host = 'jenkins.ninopeters.de'
