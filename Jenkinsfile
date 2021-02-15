@@ -10,10 +10,11 @@ pipeline {
                             docker.image('npetersdev/spring-petclinic-rest:test')
                             .withRun('--detach --rm --publish 9966:9966 --name spring-petclinic-rest'){
                             }
+                            sh'docker ps'
                         }
                         } catch (err) {
                             echo 'docker rest-container already running'
-                            sh'docker restart spring-petclinic-api-test'
+                            sh'docker restart spring-petclinic-rest'
                         } finally {
         
                         }
