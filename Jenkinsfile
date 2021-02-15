@@ -5,10 +5,10 @@ pipeline {
             steps {
                 script {
                     echo 'Branch:...' + env.GIT_BRANCH
-                    def app = docker.build("npetersdev/spring-petclinic-angular")
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                    //def app = docker.build("npetersdev/spring-petclinic-angular")
+                    //docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                         //app.push("${env.BUILD_NUMBER}")
-                        app.push("latest")
+                    //    app.push("latest")
                     }
                 }
             }
@@ -29,6 +29,7 @@ pipeline {
                 script {
                     withCredentials([sshUserPrivateKey(credentialsId: 'remote_guest_auth', keyFileVariable: 'KEYFILE', usernameVariable: 'USERNAME', passphraseVariable: 'PASSPHRASE')]) {
                        def remote = [:]
+                       remote.name = 'server'
                        remote.host = 'jenkins.ninopeters.de'
                        remote.port = 4714
                        remote.allowAnyHosts = true
