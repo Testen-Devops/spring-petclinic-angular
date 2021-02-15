@@ -8,8 +8,8 @@ pipeline {
                         try {
                             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                             docker.image('npetersdev/spring-petclinic-rest:latest')
-                            .withRun('--rm --publish 9966:9966 --name spring-petclinic-rest'){
-                            }
+                            
+                            sh'docker create --rm --publish 9966:9966 --name spring-petclinic-rest npetersdev/spring-petclinic-rest:latest'
                             sh'docker ps'
                         }
                         } catch (err) {
