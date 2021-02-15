@@ -30,15 +30,12 @@ pipeline {
                     withCredentials([sshUserPrivateKey(credentialsId: 'remote_guest_auth', keyFileVariable: 'KEYFILE', usernameVariable: 'USERNAME', passphraseVariable: 'PASSPHRASE')]) {
                         def remote = [:]
                         remote.name = 'server'
-                        remote.host = 'jenkins.ninopeters.de'
+                        remote.host = '185.207.106.34'
                         remote.port = 4714
                         remote.allowAnyHosts = true
                         remote.user = USERNAME
                         remote.identityFile = KEYFILE
                         remote.passphrase = PASSPHRASE
-
-                        echo KEYFILE
-                        echo PASSPHRASE
 
                         try {
                             sshCommand remote: remote, command: 'docker container stop spring-petclinic-angular-A'
@@ -58,7 +55,7 @@ pipeline {
                     withCredentials([sshUserPrivateKey(credentialsId: 'remote_guest_auth', keyFileVariable: 'KEYFILE', usernameVariable: 'USERNAME', passphraseVariable: 'PASSPHRASE')]) {
                         def remote = [:]
                         remote.name = 'server'
-                        remote.host = 'jenkins.ninopeters.de'
+                        remote.host = '185.207.106.34'
                         remote.port = 4714
                         remote.allowAnyHosts = true
                         remote.user = USERNAME
