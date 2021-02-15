@@ -162,7 +162,7 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Running end-to-end tests
 
-Run `docker-compose run cypress ./node_modules/.bin/cypress run --config baseUrl=http://127.0.0.1:8080` to execute the end-to-end tests via [Cypress](http://www.cypress.io/).
+Run `docker-compose run cypress npx cypress run --config baseUrl=http://127.0.0.1:8080` to execute the end-to-end tests via [Cypress](http://www.cypress.io/).
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 Before running the tests make sure you are serving the app via `ng serve`.
 

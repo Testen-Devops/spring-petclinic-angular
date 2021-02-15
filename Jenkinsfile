@@ -19,8 +19,9 @@ pipeline {
                         }
                     }
                     sleep(time:10,unit:"SECONDS")
-
-                    sh'docker-compose run cypress npx cypress run --config baseUrl=http://127.0.0.1:8080'
+                    
+                    sh'docker-compose build --no-cache'
+                    sh'docker-compose run --rm cypress npx cypress run --config baseUrl=http://127.0.0.1:8080'
                 }
             }
         }

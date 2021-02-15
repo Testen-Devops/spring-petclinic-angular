@@ -5,17 +5,18 @@ FROM cypress/browsers:latest
 RUN mkdir /usr/src/app
 WORKDIR /usr/src/app
 
-# install cypress
-RUN npm install cypress
 
 # copy cypress files and folders
 COPY cypress /usr/src/app/cypress
 COPY cypress.json /usr/src/app/cypress.json
 COPY package.json /usr/src/app/package.json
-RUN npm install
+# install cypress
 RUN npm i @cypress/webpack-preprocessor 
 RUN npm i ts-loader
+RUN npm install
+RUN npm install cypress
 # confirm the cypress install
 
 RUN npx cypress verify
+
         
