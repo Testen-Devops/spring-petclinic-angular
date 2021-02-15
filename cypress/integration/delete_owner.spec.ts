@@ -1,6 +1,5 @@
 it('deletes owner', () => {
   cy.visit('/');
-  //TODO: save owners name to make sure its not present anymore after deletion!
   cy.contains('Owners').click();
   cy.contains('All').click();
 
@@ -18,6 +17,4 @@ it('deletes owner', () => {
     expect($nextOwner.text()).to.not.equal(ownersName)
   })
 
-
-  // TODO: check if $owner.name is not present anymore.
 });

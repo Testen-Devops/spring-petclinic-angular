@@ -1,6 +1,10 @@
 version: '3.6'
 
 services:
+  backend:
+        image: npetersdev/spring-petclinic-rest:test
+        ports:
+         - '9966:9966'
 
   angular:
     build:
@@ -8,6 +12,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - '8080:8080'
+    depends_on:
+      - backend
 
   cypress:
     build:
