@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     def prod = load "jobs/production.groovy"
-                    prod.run('spring-petclinic-angular-A')
+                    prod.run('spring-petclinic-angular-A', 3000)
                 }
             }
         }
@@ -31,7 +31,7 @@ pipeline {
             steps {
                 script {
                     def prod = load "jobs/production.groovy"
-                    prod.run('spring-petclinic-angular-B')
+                    prod.run('spring-petclinic-angular-B', 3001)
                 }
             }
         }

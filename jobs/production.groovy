@@ -9,7 +9,7 @@ def push(app) {
     }
 }
 
-def run(container_name) {
+def run(container_name, port) {
     def remote = [:]
     remote.name = 'server'
     remote.host = '185.207.106.34'
@@ -26,7 +26,7 @@ def run(container_name) {
             echo 'docker container not running'
         } finally {
             sshCommand remote: remote, command: 'docker pull npetersdev/spring-petclinic-angular:latest'
-            sshCommand remote: remote, command: 'docker run --detach --rm --publish 3000:80 --name ' + container_name + ' npetersdev/spring-petclinic-angular:latest'
+            sshCommand remote: remote, command: 'docker run --detach --rm --publish ' + port + ':80 --name ' + container_name + ' npetersdev/spring-petclinic-angular:latest'
         }
     }
 }
