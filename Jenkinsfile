@@ -1,10 +1,10 @@
 pipeline {
     agent any
-    when {
-        expression { return env.GIT_BRANCH = "master"}
-    }
     stages {
         stage('Build & Push docker image') {
+            when {
+                expression { return env.GIT_BRANCH = "master"}
+            }
             steps {
                 script {
                     def app = docker.build("npetersdev/spring-petclinic-angular")
@@ -15,7 +15,10 @@ pipeline {
                 }
             }
         }
-        stage('Run docker image on remote server A') {
+        stage('Run docker image on remote server A') 
+            when {
+                expression { return env.GIT_BRANCH = "master"}
+            }
             steps {
                 script {
                     withCredentials([sshUserPrivateKey(credentialsId: 'remote_guest_auth', keyFileVariable: 'KEYFILE', passphraseVariable: 'PASSPHRASE', usernameVariable: 'USERNAME')]) {
@@ -41,6 +44,9 @@ pipeline {
             }
         }
         stage('Run docker image on remote server B') {
+            when {
+                expression { return env.GIT_BRANCH = "master"}
+            }
             steps {
                 script {
                     withCredentials([sshUserPrivateKey(credentialsId: 'remote_guest_auth', keyFileVariable: 'KEYFILE', passphraseVariable: 'PASSPHRASE', usernameVariable: 'USERNAME')]) {
@@ -66,6 +72,9 @@ pipeline {
             }
         }
         stage('Delete unused docker image') {
+            when {
+                expression { return env.GIT_BRANCH = "master"}
+            }
             steps {
                 sh 'docker rmi npetersdev/spring-petclinic-angular:latest'
             }
