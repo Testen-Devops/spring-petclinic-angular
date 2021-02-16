@@ -5,7 +5,9 @@ pipeline {
     agent any
     stages {
         stage ('Preparation') {
-            prod = load "jobs/production.groovy"
+            steps {
+                prod = load "jobs/production.groovy"
+            }
         }
         stage('Build & Push docker image') {
             when {
