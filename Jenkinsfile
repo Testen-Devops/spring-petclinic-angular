@@ -8,7 +8,9 @@ pipeline {
             steps {
                 script {
                     echo "Branche..." + env.GIT_BRANCH
-                    def app = docker.build("npetersdev/spring-petclinic-angular")
+                    def prod = load "jobs/production.groovy"
+                    prod.build()
+                    //def app = docker.build("npetersdev/spring-petclinic-angular")
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                         //app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
