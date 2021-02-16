@@ -1,10 +1,12 @@
 pipeline {
     agent any
+    when {
+        expression { return env.GIT_BRANCH = "master"}
+    }
     stages {
         stage('Build & Push docker image') {
             steps {
                 script {
-                    echo 'Branch:...' + env.GIT_BRANCH
                     def app = docker.build("npetersdev/spring-petclinic-angular")
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                         //app.push("${env.BUILD_NUMBER}")
