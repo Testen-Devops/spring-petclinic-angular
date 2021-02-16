@@ -1,10 +1,3 @@
-def remote = [:]
-this.remote.name = 'server'
-this.remote.host = '185.207.106.34'
-this.remote.port = 4714
-this.remote.allowAnyHosts = true
-    
-
 def build() {
     return docker.build("npetersdev/spring-petclinic-angular")
 }
@@ -17,18 +10,23 @@ def push(app) {
 }
 
 def run(container_name) {
+    def remote = [:]
+    remote.name = 'server'
+    remote.host = '185.207.106.34'
+    remote.port = 4714
+    remote.allowAnyHosts = true
     withCredentials([sshUserPrivateKey(credentialsId: 'remote_guest_auth', keyFileVariable: 'KEYFILE', passphraseVariable: 'PASSPHRASE', usernameVariable: 'USERNAME')]) {
-        this.remote.user = USERNAME
-        this.remote.identityFile = KEYFILE
-        this.remote.passphrase = PASSPHRASE
+        remote.user = USERNAME
+        remote.identityFile = KEYFILE
+        remote.passphrase = PASSPHRASE
 
         try {
-            sshCommand remote: this.remote, command: 'docker container stop' + container_name
+            sshCommand remote: remote, command: 'docker container stop' + container_name
         } catch (err) {
             echo 'docker container not running'
         } finally {
-            sshCommand remote: this.remote, command: 'docker pull npetersdev/spring-petclinic-angular:latest'
-            sshCommand remote: this.remote, command: 'docker run --detach --rm --publish 3000:80 --name' + container_name + 'npetersdev/spring-petclinic-angular:latest'
+            sshCommand remote: remote, command: 'docker pull npetersdev/spring-petclinic-angular:latest'
+            sshCommand remote: remote, command: 'docker run --detach --rm --publish 3000:80 --name' + container_name + 'npetersdev/spring-petclinic-angular:latest'
         }
     }
 }
