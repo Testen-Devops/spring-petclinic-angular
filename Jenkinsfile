@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script {
                     echo "Branche..." + env.GIT_BRANCH
-                    echo "root..." + ${rootDir}
+                    echo "root... ${rootDir}"
                     def prod = load "jobs/production.groovy"
                     prod.build()
                     //def app = docker.build("npetersdev/spring-petclinic-angular")
