@@ -1,21 +1,14 @@
-def prod
-def app
-
 pipeline {
     agent any
     stages {
-        stage ('Preparation') {
-            steps {
-                prod = load "jobs/production.groovy"
-            }
-        }
         stage('Build & Push docker image') {
             when {
                 branch 'master'
             }
             steps {
                 script {
-                    app = prod.build()
+                    def prod = load "jobs/production.groovy"
+                    def app = prod.build()
                     prod.push(app)
                 }
             }
