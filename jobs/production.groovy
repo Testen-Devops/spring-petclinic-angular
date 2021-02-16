@@ -21,12 +21,12 @@ def run(container_name) {
         remote.passphrase = PASSPHRASE
 
         try {
-            sshCommand remote: remote, command: 'docker container stop' + container_name
+            sshCommand remote: remote, command: 'docker container stop ' + container_name
         } catch (err) {
             echo 'docker container not running'
         } finally {
             sshCommand remote: remote, command: 'docker pull npetersdev/spring-petclinic-angular:latest'
-            sshCommand remote: remote, command: 'docker run --detach --rm --publish 3000:80 --name' + container_name + 'npetersdev/spring-petclinic-angular:latest'
+            sshCommand remote: remote, command: 'docker run --detach --rm --publish 3000:80 --name ' + container_name + ' npetersdev/spring-petclinic-angular:latest'
         }
     }
 }
