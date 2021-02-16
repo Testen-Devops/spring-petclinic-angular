@@ -8,6 +8,7 @@ pipeline {
             steps {
                 script {
                     echo "Branche..." + env.GIT_BRANCH
+                    def rootDir = pwd()
                     echo "root... ${rootDir}"
                     def prod = load "jobs/production.groovy"
                     prod.build()
