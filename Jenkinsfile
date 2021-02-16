@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build & Push docker image') {
             when {
-                expression { return env.GIT_BRANCH == "master" }
+                branch 'master'
             }
             steps {
                 script {
@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Run docker image on remote server A') {
             when {
-                expression { return env.GIT_BRANCH == "master" }
+                branch 'master'
             }
             steps {
                 script {
@@ -46,7 +46,7 @@ pipeline {
         }
         stage('Run docker image on remote server B') {
             when {
-                expression { return env.GIT_BRANCH == "master" }
+                branch 'master'
             }
             steps {
                 script {
@@ -74,7 +74,7 @@ pipeline {
         }
         stage('Delete unused docker image') {
             when {
-                expression { return env.GIT_BRANCH == "master" }
+                branch 'master'
             }
             steps {
                 sh 'docker rmi npetersdev/spring-petclinic-angular:latest'
