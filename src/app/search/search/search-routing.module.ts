@@ -22,21 +22,16 @@
 
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {PageNotFoundComponent} from './parts/page-not-found/page-not-found.component';
-import {WelcomeComponent} from './parts/welcome/welcome.component';
-import { SearchComponent } from './search/search/search.component';
+import { SearchComponent } from './search.component';
 
-const appRoutes: Routes = [
-  {path: 'welcome', component: WelcomeComponent},
-  {path: '', component: WelcomeComponent},
+const searchRoutes: Routes = [
   {path: 'search', component: SearchComponent},
-  {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [RouterModule.forChild(searchRoutes)],
   exports: [RouterModule]
 })
 
-export class AppRoutingModule {
+export class OwnersRoutingModule {
 }

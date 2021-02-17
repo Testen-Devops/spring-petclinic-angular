@@ -22,6 +22,7 @@
 
 import {Component} from '@angular/core';
 import { FormControl, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SearchService } from './search.service';
 
 @Component({
@@ -33,7 +34,7 @@ export class AppComponent {
 
   searchForm;
 
-  constructor(private formBuilder: FormBuilder, private searchService: SearchService) {
+  constructor(private formBuilder: FormBuilder, private searchService: SearchService, private router: Router) {
     this.searchForm = this.formBuilder.group({
       searchInput: new FormControl(''),
     });
@@ -44,5 +45,6 @@ export class AppComponent {
     if (input != "") {
       this.searchService.getSearchResult(input);
     }
+    this.router.navigate(['/search']);
   }
 }

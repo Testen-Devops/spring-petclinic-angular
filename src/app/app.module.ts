@@ -37,11 +37,13 @@ import {HttpErrorHandler} from './error.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SearchService } from './search.service';
+import { SearchComponent } from './search/search/search.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    SearchComponent,
   ],
   imports: [
     ReactiveFormsModule,

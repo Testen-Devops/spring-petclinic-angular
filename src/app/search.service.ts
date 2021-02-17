@@ -40,7 +40,7 @@ export class SearchService {
 
 
   getSearchResult(searchInput: string): Observable<object> {
-    return this.http.post<string>(this.entityUrl + '/' + searchInput)
+    return this.http.get<object>(this.entityUrl + '/' + searchInput)
       .pipe(
        // catchError(this.handlerError('deletePet', 0))
       );
