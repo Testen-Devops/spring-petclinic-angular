@@ -34,6 +34,7 @@ import {Owner} from '../owner';
 export class OwnerDetailComponent implements OnInit {
   errorMessage: string;
   owner: Owner;
+  deleteSuccess = false;
 
   constructor(private route: ActivatedRoute, private router: Router, private ownerService: OwnerService) {
     this.owner = {} as Owner;
@@ -56,6 +57,17 @@ export class OwnerDetailComponent implements OnInit {
 
   addPet(owner: Owner) {
     this.router.navigate(['/owners', owner.id, 'pets', 'add']);
+  }
+
+  deleteOwner(owner: Owner) {
+    this.ownerService.deleteOwner(owner.id.toString()).subscribe(
+      response => {
+        this.deleteSuccess = true;
+        this.owner = {} as Owner;
+
+        this.gotoOwnersList();
+      },
+      error => this.errorMessage = error as any);
   }
 
 
