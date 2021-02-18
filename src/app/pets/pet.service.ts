@@ -53,6 +53,13 @@ export class PetService {
       );
   }
 
+  getPetsByName(petName: string): Observable<Pet[]> {
+    return this.http.get<Pet[]>(this.entityUrl + '/' + petName)
+      .pipe(
+        catchError(this.handlerError('getPetByName', []))
+      );
+  }
+
   addPet(pet: Pet): Observable<Pet> {
     return this.http.post<Pet>(this.entityUrl, pet)
       .pipe(
