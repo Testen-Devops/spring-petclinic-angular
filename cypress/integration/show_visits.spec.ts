@@ -1,8 +1,10 @@
 it('should add related to a vet and show all visits of vet', () => {
-  cy.visit('petclinic/owners/5');
+  cy.visit('/');
+  cy.contains('Owners').click();
+  cy.contains('All').click();
+  cy.contains('Peter McTavish').click();
   cy.contains('Add Visit').click();
   cy.get('input')
-
     .eq(0)
     .should('have.attr','name','date')
     .type('2005/01/06')
@@ -18,7 +20,7 @@ it('should add related to a vet and show all visits of vet', () => {
 
     cy.contains('Add Visit').click();
 
-    cy.contains('Sharon Jenkins').click()
+    cy.contains('Sharon Jenkins').first().click()
 
     cy.get('tbody').within($tbody => {
       cy.get('tr').last().within($tr => {
