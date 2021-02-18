@@ -1,6 +1,4 @@
 {
-  "retries":	{ "runMode": 1, "openMode": 0 },
-  "video": false,
   "include": ["../node_modules/cypress", "**/*.ts"],
   "compilerOptions": {
     "sourceMap": false

@@ -1,4 +1,7 @@
+
 {
+  "retries":	{ "runMode": 1, "openMode": 0 },
+  "video": false,
   "integrationFolder": "cypress/integration",
   "supportFile": "cypress/support/index.ts",
   "videosFolder": "cypress/videos",
