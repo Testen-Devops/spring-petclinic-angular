@@ -36,7 +36,6 @@ import {SpecialtiesModule} from './specialties/specialties.module';
 import {HttpErrorHandler} from './error.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SearchService } from './search.service';
 import { SearchComponent } from './search/search/search.component';
 
 
@@ -61,8 +60,7 @@ import { SearchComponent } from './search/search/search.component';
     AppRoutingModule
   ],
   providers: [
-    HttpErrorHandler,
-    SearchService
+    HttpErrorHandler
   ],
   bootstrap: [AppComponent]
 })

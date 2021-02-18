@@ -29,7 +29,8 @@ const searchRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(searchRoutes)],
+  imports: 
+  [RouterModule.forRoot(searchRoutes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 

@@ -29,12 +29,12 @@ import { SearchComponent } from './search/search/search.component';
 const appRoutes: Routes = [
   {path: 'welcome', component: WelcomeComponent},
   {path: '', component: WelcomeComponent},
-  {path: 'search', component: SearchComponent},
+  {path: 'search/:input', component: SearchComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 
