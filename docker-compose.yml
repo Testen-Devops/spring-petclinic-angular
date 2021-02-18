@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   backend:
-        image: npetersdev/spring-petclinic-rest:test
+        image: npetersdev/spring-petclinic-rest:latest
         ports:
          - '9966:9966'
 
