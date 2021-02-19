@@ -1,13 +1,7 @@
 
 {
-  "retries":	{ "runMode": 1, "openMode": 0 },
   "video": false,
-  "screenshot": false,
-  "integrationFolder": "cypress/integration",
-  "supportFile": "cypress/support/index.js",
-  "videosFolder": "cypress/videos",
-  "screenshotsFolder": "cypress/screenshots",
-  "pluginsFile": "cypress/plugins/index.js",
-  "fixturesFolder": "cypress/fixtures",
+  "numTestsKeptInMemory": 0,
+  "screenshotOnRunFailure": false,
   "baseUrl": "http://127.0.0.1:4200"
 }
