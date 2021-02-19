@@ -1,7 +1,5 @@
 {
-  "retries":	{ "runMode": 1, "openMode": 0 },
-  "video": false,
-  "include": ["../node_modules/cypress", "**/*.ts"],
+  "include": ["../node_modules/cypress", "**/*.ts", "support/commands.js", "support/index.js"],
   "compilerOptions": {
     "sourceMap": false
   }
