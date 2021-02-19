@@ -34,7 +34,7 @@ export class SearchComponent implements OnInit {
     this.petService.getPetsByKey(this.input).subscribe(pets => {
       const type = "pets";
       for (let i = 0; i < pets.length; i++) {
-        let name = pets[i].name + " Owner: " + pets[i].owner;
+        let name = pets[i].name + ",   Owner: " + pets[i].owner.firstName + " " + pets[i].owner.lastName;
         let result = new Result(name, type, pets[i].id);
         this.results.push(result);
       }
