@@ -13,7 +13,8 @@
           <tbody>
           <tr *ngFor="let result of results">
 
-            <td ><a  routerLinkActive="active">{{ result.name }}</a></td>
+            <td ><a routerLink="/owners/{{result.id}}"
+              (click)="onSelectOwner(result.id)"  routerLinkActive="active">{{ result.name }}</a></td>
             <td> {{ result.type }}</td>
 
           </tr>

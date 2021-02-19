@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OwnerService } from 'app/owners/owner.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { VisitService } from 'app/visits/visit.service';
 import { PetService } from 'app/pets/pet.service';
 
@@ -13,35 +13,26 @@ export class SearchComponent implements OnInit {
 
   input: string;
 
-  results: Result[] = [
-    {
-      name: "penner",
-      type: "owner"
-  },
-  {
-    name: "penner2",
-    type: "pet"
-  }
-  ]
-
+  results: Result[] = [];
 
   constructor(private ownerService: OwnerService, private visitService: VisitService,
-    private petService: PetService, private actRoute: ActivatedRoute) {
+    private petService: PetService, private actRoute: ActivatedRoute, private router: Router) {
     this.input = this.actRoute.snapshot.params.input;
    }
 
 
   ngOnInit() {
-    this.ownerService.getOwnerByName(this.input).subscribe(owners => {
+    this.ownerService.getOwnerByKey(this.input).subscribe(owners => {
       const type = "owner";
       for (let i = 0; i < owners.length; i++) {
-        let name = owners[i].firstName + owners[i].lastName;
-        let result = new Result(name, type);
+        let name = owners[i].firstName + " " + owners[i].lastName;
+        let result = new Result(name, type, owners[i].id);
+        console.log(result)
         this.results.push(result);
       }
     });
 
-    this.petService.getPetsByName(this.input).subscribe(pets => {
+/*     this.petService.getPetsByName(this.input).subscribe(pets => {
       const type = "pets";
       for (let i = 0; i < pets.length; i++) {
         let name = pets[i].name;
@@ -49,13 +40,18 @@ export class SearchComponent implements OnInit {
         this.results.push(result);
       }
     });
-
+ */
 
     // TO DO: Visits von den eingeholten owner/pets über ID holen?
+  }
+
+  onSelectOwner(id: number) {
+    this.router.navigate(['/owners', id]);
   }
 
 }
 
 export class Result {
-  constructor(name: string, type: string) {}
+  constructor(private name: string, private type: string, private id: number) {
+  }
 }

@@ -54,10 +54,10 @@ export class OwnerService {
       );
   }
 
-  getOwnerByName(ownerName: string): Observable<Owner[]> {
-    return this.http.get<Owner[]>(this.entityUrl + '/' + ownerName)
+  getOwnerByKey(key: string): Observable<Owner[]> {
+    return this.http.get<Owner[]>(this.entityUrl + '/search/' + key)
       .pipe(
-          catchError(this.handlerError('getOwnerByName', []))
+          catchError(this.handlerError('getOwnerByKey', []))
       );
   }
 
