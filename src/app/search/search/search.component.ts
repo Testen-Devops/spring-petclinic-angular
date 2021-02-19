@@ -23,30 +23,22 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.ownerService.getOwnerByKey(this.input).subscribe(owners => {
-      const type = "owner";
+      const type = "owners";
       for (let i = 0; i < owners.length; i++) {
         let name = owners[i].firstName + " " + owners[i].lastName;
         let result = new Result(name, type, owners[i].id);
-        console.log(result)
         this.results.push(result);
       }
     });
 
-/*     this.petService.getPetsByName(this.input).subscribe(pets => {
+    this.petService.getPetsByKey(this.input).subscribe(pets => {
       const type = "pets";
       for (let i = 0; i < pets.length; i++) {
-        let name = pets[i].name;
-        let result = new Result(name, type);
+        let name = pets[i].name + " Owner: " + pets[i].owner;
+        let result = new Result(name, type, pets[i].id);
         this.results.push(result);
       }
     });
- */
-
-    // TO DO: Visits von den eingeholten owner/pets über ID holen?
-  }
-
-  onSelectOwner(id: number) {
-    this.router.navigate(['/owners', id]);
   }
 
 }
