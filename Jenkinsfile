@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('run docker-compose for testing') {
             when {
-                branch 'develop'
+                anyof {  branch 'master'; branch 'develop'; branch 'feature/testing' }
             }
             steps {
                 echo 'Branch:...' + env.GIT_BRANCH              
