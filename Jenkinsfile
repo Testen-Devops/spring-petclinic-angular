@@ -6,9 +6,7 @@ pipeline {
                 branch 'develop'
             }
             steps {
-                echo 'Branch:...' + env.GIT_BRANCH
-                sleep(time:10,unit:"SECONDS")
-                
+                echo 'Branch:...' + env.GIT_BRANCH              
                 echo 'Get a Coffee --> this will take way too long'
                 sh'docker ps'
                 sh'docker-compose up --build --abort-on-container-exit'
