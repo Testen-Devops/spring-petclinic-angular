@@ -20,7 +20,7 @@ it('should add related to a vet and show all visits of vet', () => {
 
     cy.contains('Add Visit').click();
 
-    cy.contains('Sharon Jenkins').first().click()
+    cy.contains('Sharon Jenkins').first().click({force: true})
 
     cy.get('tbody').within($tbody => {
       cy.get('tr').last().within($tr => {

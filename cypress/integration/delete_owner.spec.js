@@ -6,7 +6,7 @@ it('deletes owner', () => {
   var ownersName;
   cy.get('td a').first().then(($firstOwner) => {
 
-    ownersName = $firstOwner.text();
+    ownersName = $firstOwner.text();  
   }).click()
 
   cy.contains('Delete Owner').click();
