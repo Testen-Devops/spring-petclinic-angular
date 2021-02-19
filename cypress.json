@@ -1,7 +1,8 @@
 
 {
+  "retries":	{ "runMode": 1, "openMode": 0 },
   "video": false,
   "numTestsKeptInMemory": 0,
   "screenshotOnRunFailure": false,
-  "baseUrl": "http://127.0.0.1:4200"
+  "baseUrl": "http://localhost:8080"
 }
