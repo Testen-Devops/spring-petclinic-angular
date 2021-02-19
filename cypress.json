@@ -1,9 +1,8 @@
+
 {
-  "integrationFolder": "cypress/integration",
-  "supportFile": "cypress/support/index.ts",
-  "videosFolder": "cypress/videos",
-  "screenshotsFolder": "cypress/screenshots",
-  "pluginsFile": "cypress/plugins/index.js",
-  "fixturesFolder": "cypress/fixtures",
+  "retries":	{ "runMode": 1, "openMode": 0 },
+  "video": false,
+  "numTestsKeptInMemory": 0,
+  "screenshotOnRunFailure": false,
   "baseUrl": "http://localhost:8080"
 }
