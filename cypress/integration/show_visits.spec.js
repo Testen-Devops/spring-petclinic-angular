@@ -21,7 +21,7 @@ it('should add related to a vet and show all visits of vet', () => {
     cy.contains('Add Visit').click();
 
     cy.contains('Sharon Jenkins').first().click({force: true})
-    // cy.url().should('equal', Cypress.config().baseUrl+'/petclinic/owners') 
+    cy.url().should('contain', Cypress.config().baseUrl+'/petclinic/vets/') 
 
     cy.get('tbody').within($tbody => {
       cy.get('tr').last().within($tr => {
