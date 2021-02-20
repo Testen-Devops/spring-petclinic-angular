@@ -1,6 +1,18 @@
 pipeline {
     agent any
     stages {
+        stage('run docker-compose for testing') {
+            when {
+                anyOf { branch 'develop'; }
+            }
+            steps {
+                echo 'Branch:...' + env.GIT_BRANCH              
+                echo 'Get a Coffee --> this will take way too long'
+                sh'docker ps'
+                sh'docker-compose up --build --abort-on-container-exit'
+                sh'docker-compose down --rmi all'
+            }
+        }
         stage('Build & Push docker image') {
             when {
                 branch 'master'
@@ -25,6 +37,9 @@ pipeline {
             }
         }
         stage ('Wait') {
+            when {
+                branch 'master'
+            }
             steps {
                 echo 'Waiting for container A to start up'
                 sleep 30 // seconds
