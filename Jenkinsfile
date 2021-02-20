@@ -1,75 +1,69 @@
 /* pipeline {
     agent any
     stages {
+        stage('run docker-compose for testing') {
+            when {
+                anyOf {branch 'master'; branch 'develop'; }
+            }
+            steps {
+                echo 'Branch:...' + env.GIT_BRANCH              
+                echo 'Get a Coffee --> this will take way too long'
+                sh'docker ps'
+                sh'docker-compose up --build --abort-on-container-exit'
+                sh'docker-compose down --rmi all'
+            }
+        }
         stage('Build & Push docker image') {
+            when {
+                branch 'master'
+            }
             steps {
                 script {
-                    echo 'Branch:...' + env.GIT_BRANCH
-                    def app = docker.build("npetersdev/spring-petclinic-angular")
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        //app.push("${env.BUILD_NUMBER}")
-                        app.push("latest")
-                    }
+                    def prod = load "jobs/production.groovy"
+                    def app = prod.build()
+                    prod.push(app)
                 }
             }
         }
         stage('Run docker image on remote server A') {
+            when {
+                branch 'master'
+            }
             steps {
                 script {
-                    withCredentials([sshUserPrivateKey(credentialsId: 'remote_guest_auth', keyFileVariable: 'KEYFILE', passphraseVariable: 'PASSPHRASE', usernameVariable: 'USERNAME')]) {
-                        def remote = [:]
-                        remote.name = 'server'
-                        remote.host = '185.207.106.34'
-                        remote.port = 4714
-                        remote.allowAnyHosts = true
-                        remote.user = USERNAME
-                        remote.identityFile = KEYFILE
-                        remote.passphrase = PASSPHRASE
-
-                        try {
-                            sshCommand remote: remote, command: 'docker container stop spring-petclinic-angular-A'
-                        } catch (err) {
-                            echo 'docker container not running'
-                        } finally {
-                           sshCommand remote: remote, command: 'docker pull npetersdev/spring-petclinic-angular:latest'
-                           sshCommand remote: remote, command: 'docker run --detach --rm --publish 3000:80 --name spring-petclinic-angular-A npetersdev/spring-petclinic-angular:latest'
-                        }
-                    }
+                    def prod = load "jobs/production.groovy"
+                    prod.run('spring-petclinic-angular-A', 3000)
                 }
             }
         }
+        stage ('Wait') {
+            when {
+                branch 'master'
+            }
+            steps {
+                echo 'Waiting for container A to start up'
+                sleep 30 // seconds
+            }
+        }
         stage('Run docker image on remote server B') {
+            when {
+                branch 'master'
+            }
             steps {
                 script {
-                    withCredentials([sshUserPrivateKey(credentialsId: 'remote_guest_auth', keyFileVariable: 'KEYFILE', passphraseVariable: 'PASSPHRASE', usernameVariable: 'USERNAME')]) {
-                        def remote = [:]
-                        remote.name = 'server'
-                        remote.host = '185.207.106.34'
-                        remote.port = 4714
-                        remote.allowAnyHosts = true
-                        remote.user = USERNAME
-                        remote.identityFile = KEYFILE
-                        remote.passphrase = PASSPHRASE
-
-                        try {
-                            sshCommand remote: remote, command: 'docker container stop spring-petclinic-angular-B'
-                        } catch (err) {
-                            echo 'docker container not running'
-                        } finally {
-                            sshCommand remote: remote, command: 'docker pull npetersdev/spring-petclinic-angular:latest'
-                            sshCommand remote: remote, command: 'docker run --detach --rm --publish 3001:80 --name spring-petclinic-angular-B npetersdev/spring-petclinic-angular:latest'
-                        }
-                    }
+                    def prod = load "jobs/production.groovy"
+                    prod.run('spring-petclinic-angular-B', 3001)
                 }
             }
         }
         stage('Delete unused docker image') {
+            when {
+                branch 'master'
+            }
             steps {
                 sh 'docker rmi npetersdev/spring-petclinic-angular:latest'
             }
-
         }
     }
-
 }
  */
