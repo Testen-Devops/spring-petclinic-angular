@@ -1,6 +1,6 @@
 
 {
-  "retries":	{ "runMode": 1, "openMode": 0 },
+  "retries":	{ "runMode": 2, "openMode": 0 },
   "video": false,
   "numTestsKeptInMemory": 0,
   "screenshotOnRunFailure": false,
