@@ -6,18 +6,36 @@
         <table class="table table-striped">
           <thead>
           <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Type</th>
+            <th>Owners</th>
+            <th>Pets</th>
+            <th>Visits</th>
           </tr>
           </thead>
   
           <tbody>
-          <tr *ngFor="let result of results">
-
-            <td ><a  routerLink="/owners/{{result.id}}"  routerLinkActive="active">{{ result.name }}</a></td>
+          <tr>
+            <td>
+              <div class="search_result" *ngFor="let owner of foundOwners">
+                <h3 class="search_title">{{owner.firstName}} {{owner.lastName}}</h3>
+              </div>
+            </td>
+            <td>
+              <div class="search_result" *ngFor="let pet of foundPets">
+                <h3 class="search_title">{{pet.name}}</h3>
+                <span>Owner: {{pet.owner.firstName}} {{pet.owner.lastName}}</span>
+              </div>
+            </td>
+            <td>
+              <div class="search_result" *ngFor="let visit of foundVisits">
+                <h3 class="search_title">{{visit.date}}</h3>
+                <p>Description: {{visit.description}}</p>
+                <p>Pet: {{visit.pet.name}}</p>
+                <p>Owner: {{visit.pet.owner.firstName}} {{visit.pet.owner.lastName}}</p>
+              </div>
+            </td>
+            <!-- <td ><a  routerLink="/owners/{{result.id}}"  routerLinkActive="active">{{ result.name }}</a></td>
             <td> {{ result.description }}</td>
-            <td> {{ result.type }}</td>
+            <td> {{ result.type }}</td> -->
 
           </tr>
           </tbody>
