@@ -1,17 +1,17 @@
-version: '3.6'
+version: "3.6"
 
 services:
   backend:
-        image: npetersdev/spring-petclinic-rest:latest
-        ports:
-         - '9966:9966'
+    image: npetersdev/spring-petclinic-rest:latest
+    ports:
+      - "9966:9966"
 
   angular:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.local
     ports:
-      - '8080:8080'
+      - "8080:8080"
     depends_on:
       - backend
 
@@ -19,9 +19,10 @@ services:
     image: cypress/included:6.4.0
     depends_on:
       - angular
-    environment: 
+    environment:
       - CYPRESS_baseUrl=http://localhost:8080
-    network_mode: 'host'
+    network_mode: "host"
     working_dir: /e2e
     volumes:
       - ./:/e2e
+    command: "--browser chrome"

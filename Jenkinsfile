@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('run docker-compose for testing') {
             when {
-                branch 'develop'
+                anyOf {  branch 'master'; branch 'develop'; branch 'feature/testing' }
             }
             steps {
                 echo 'Branch:...' + env.GIT_BRANCH              
@@ -37,6 +37,9 @@ pipeline {
             }
         }
         stage ('Wait') {
+            when {
+                branch 'master'
+            }
             steps {
                 echo 'Waiting for container A to start up'
                 sleep 30 // seconds
