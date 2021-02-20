@@ -29,6 +29,10 @@ export class SearchComponent implements OnInit {
     this.input = this.actRoute.snapshot.params.input;
   }
 
+  onSelectOwner(ownerId: number) {
+    this.router.navigate(["/owners", ownerId]);
+  }
+
   ngOnInit() {
     let ownErr = false;
     this.ownerService.getOwnerByKey(this.input).subscribe(
