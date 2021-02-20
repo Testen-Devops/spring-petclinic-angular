@@ -55,9 +55,6 @@ export class PetService {
 
   getPetsByKey(key: string): Observable<Pet[]> {
     return this.http.get<Pet[]>(this.entityUrl + '/search/' + key)
-      .pipe(
-        catchError(this.handlerError('getPetByKey', []))
-      );
   }
 
   addPet(pet: Pet): Observable<Pet> {

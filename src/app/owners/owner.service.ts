@@ -56,9 +56,6 @@ export class OwnerService {
 
   getOwnerByKey(key: string): Observable<Owner[]> {
     return this.http.get<Owner[]>(this.entityUrl + '/search/' + key)
-      .pipe(
-          catchError(this.handlerError('getOwnerByKey', []))
-      );
   }
 
   addOwner(owner: Owner): Observable<Owner> {
