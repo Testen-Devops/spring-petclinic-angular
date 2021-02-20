@@ -20,12 +20,13 @@
  * @author Vitaliy Fedoriv
  */
 
-import {Pet} from '../pets/pet';
+import { Vet } from "app/vets/vet";
+import { Pet } from "../pets/pet";
 
 export interface Visit {
   id: number;
   date: string;
   description: string;
   pet: Pet;
-
+  vet: Vet;
 }

@@ -5,7 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build-prod": "ng build --prod --configuration=production",
+    "build-local": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -29,13 +30,15 @@
     "moment": "^2.22.1",
     "rxjs": "^6.3.1",
     "tether": "^1.4.4",
-    "zone.js": "^0.9.1"
+    "zone.js": "^0.9.1",
+    "@angular-devkit/build-angular": "~0.800.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.800.0",
     "@angular/cli": "^8.0.3",
     "@angular/compiler-cli": "8.0.1",
     "@angular/language-service": "8.0.1",
+    "@cypress/webpack-preprocessor": "^5.5.0",
     "@types/jasmine": "~2.8.3",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "^6.0.106",
@@ -50,6 +53,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.1.2",
     "source-map-explorer": "^1.5.0",
+    "ts-loader": "^8.0.15",
     "ts-node": "~4.1.0",
     "tslint": "~5.15.0",
     "typescript": "3.4.5"
