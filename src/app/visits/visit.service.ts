@@ -53,6 +53,10 @@ export class VisitService {
       );
   }
 
+  getVisitsByKey(key: string): Observable<Visit[]> {
+    return this.http.get<Visit[]>(this.entityUrl + '/search/' + key)
+  }
+
   addVisit(visit: Visit): Observable<Visit> {
     return this.http.post<Visit>(this.entityUrl, visit)
       .pipe(
