@@ -25,3 +25,4 @@ services:
     working_dir: /e2e
     volumes:
       - ./:/e2e
+    command: "--browser chrome"
