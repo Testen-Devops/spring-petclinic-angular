@@ -53,6 +53,10 @@ export class PetService {
       );
   }
 
+  getPetsByKey(key: string): Observable<Pet[]> {
+    return this.http.get<Pet[]>(this.entityUrl + '/search/' + key)
+  }
+
   addPet(pet: Pet): Observable<Pet> {
     return this.http.post<Pet>(this.entityUrl, pet)
       .pipe(

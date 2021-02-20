@@ -21,6 +21,8 @@
  */
 
 import {Component} from '@angular/core';
+import { FormControl, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -29,4 +31,21 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
 
+  searchForm;
+
+  constructor(private formBuilder: FormBuilder, private router: Router) {
+    this.searchForm = this.formBuilder.group({
+      searchInput: new FormControl(''),
+    });
+  }
+
+  onSubmit() {
+    let input = this.searchForm.value.searchInput;
+    if (input == "") {
+      input = " ";
+    }
+    this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/search/' + input]);
+  }); 
+  }
 }
