@@ -1,4 +1,4 @@
-/* pipeline {
+pipeline {
     agent any
     stages {
         stage('run docker-compose for testing') {
@@ -66,4 +66,3 @@
         }
     }
 }
- */
