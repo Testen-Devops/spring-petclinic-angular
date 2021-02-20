@@ -12,7 +12,7 @@ import { PetService } from 'app/pets/pet.service';
 export class SearchComponent implements OnInit {
 
   input: string;
-
+  err: boolean = false;
   results: Result[] = [];
 
   constructor(private ownerService: OwnerService, private visitService: VisitService,
@@ -22,6 +22,7 @@ export class SearchComponent implements OnInit {
 
 
   ngOnInit() {
+    let ownErr = false;
     this.ownerService.getOwnerByKey(this.input).subscribe(owners => {
       const type = "Owner";
       for (let i = 0; i < owners.length; i++) {
@@ -32,8 +33,13 @@ export class SearchComponent implements OnInit {
     },
     (error) => {
      console.log('ERR: No Owners found')
+     ownErr = true;
+     if (ownErr && petErr) {
+      this.err = true;
+    }
     });
 
+    let petErr = false;
     this.petService.getPetsByKey(this.input).subscribe(pets => {
       const type = "Pet";
       for (let i = 0; i < pets.length; i++) {
@@ -44,6 +50,10 @@ export class SearchComponent implements OnInit {
     },
     (error) => {
       console.log('ERR: No Pets found')
+      petErr = true;
+      if (ownErr && petErr) {
+        this.err = true;
+      }
     });
   }
 
