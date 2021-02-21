@@ -31,7 +31,7 @@ import {catchError} from 'rxjs/internal/operators';
 @Injectable()
 export class VisitService {
 
-  private entityUrl = environment.REST_API_URL + 'visits';
+  entityUrl = environment.REST_API_URL + 'visits';
 
   private readonly handlerError: HandleError;
 
