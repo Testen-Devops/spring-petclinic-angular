@@ -134,5 +134,23 @@ describe("OnwerService", () => {
       // Respond with the mock owners
       //req.flush();
     });
+
+    it("should return owners by key (called once)", () => {
+      ownerService
+        .getOwnerByKey("A")
+        .subscribe(
+          (response) => expect(response).toEqual(expectedOwners),
+          fail
+        );
+
+      // OwnerService should have made one request to GET owners from expected URL
+      const req = httpTestingController.expectOne(
+        ownerService.entityUrl + "/search/A"
+      );
+      expect(req.request.method).toEqual("GET");
+
+      // Respond with the mock owners
+      req.flush(expectedOwners);
+    });
   });
 });
