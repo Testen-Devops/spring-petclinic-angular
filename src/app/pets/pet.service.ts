@@ -31,7 +31,7 @@ import {HandleError, HttpErrorHandler} from '../error.service';
 @Injectable()
 export class PetService {
 
-  private entityUrl = environment.REST_API_URL + 'pets';
+  entityUrl = environment.REST_API_URL + 'pets';
 
   private readonly handlerError: HandleError;
 
