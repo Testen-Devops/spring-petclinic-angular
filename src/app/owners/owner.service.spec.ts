@@ -134,20 +134,5 @@ describe("OnwerService", () => {
       // Respond with the mock owners
       //req.flush();
     });
-
-    it("should delete Owner (called once)", () => {
-      ownerService
-        .deleteOwner("1")
-        .subscribe((response) => expect(response).toBe("empty"), fail);
-
-      // OwnerService should have made one request to GET owners from expected URL
-      const req = httpTestingController.expectOne(
-        ownerService.entityUrl + "/1"
-      );
-      expect(req.request.method).toEqual("DELETE");
-
-      // Respond with the mock owners
-      //req.flush();
-    });
   });
 });
