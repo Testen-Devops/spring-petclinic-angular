@@ -1,0 +1,49 @@
+<div class="container-fluid">
+    <div class="container xd-container">
+      <h2>Results</h2>
+      <h2 *ngIf="err" style="color: red"> Nothing found </h2>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Owners</th>
+            <th>Pets</th>
+            <th>Visits</th>
+          </tr>
+          </thead>
+  
+          <tbody>
+          <tr>
+            <td>
+              <div class="search_result" *ngFor="let owner of foundOwners">
+                <h3 class="search_title"><a routerLink="/owners/{{owner.id}}" routerLinkActive="active"
+                  (click)="onSelectOwner(owner.id)">{{ owner.firstName + ' ' + owner.lastName }}</a></h3>
+              </div>
+            </td>
+            <td>
+              <div class="search_result" *ngFor="let pet of foundPets">
+                <h3 class="search_title">{{pet.name}}</h3>
+                <span>Owner: <a routerLink="/owners/{{pet.owner.id}}" routerLinkActive="active"
+                  (click)="onSelectOwner(pet.owner.id)">{{ pet.owner.firstName + ' ' + pet.owner.lastName }}</a></span>
+              </div>
+            </td>
+            <td>
+              <div class="search_result" *ngFor="let visit of foundVisits">
+                <h3 class="search_title">{{visit.date}}</h3>
+                <p>Description: {{visit.description}}</p>
+                <p>Pet: {{visit.pet.name}}</p>
+                <p>Owner: <a routerLink="/owners/{{visit.pet.owner.id}}" routerLinkActive="active"
+                  (click)="onSelectOwner(visit.pet.owner.id)">{{ visit.pet.owner.firstName + ' ' + visit.pet.owner.lastName }}</a></p>
+              </div>
+            </td>
+            <!-- <td ><a  routerLink="/owners/{{result.id}}"  routerLinkActive="active">{{ result.name }}</a></td>
+            <td> {{ result.description }}</td>
+            <td> {{ result.type }}</td> -->
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

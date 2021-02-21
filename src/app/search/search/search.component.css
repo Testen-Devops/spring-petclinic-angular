@@ -1,0 +1,9 @@
+.search_result {
+  border: 1px solid black;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.search_title {
+  margin-bottom: 0px;
+}

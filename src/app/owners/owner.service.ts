@@ -54,6 +54,10 @@ export class OwnerService {
       );
   }
 
+  getOwnerByKey(key: string): Observable<Owner[]> {
+    return this.http.get<Owner[]>(this.entityUrl + '/search/' + key)
+  }
+
   addOwner(owner: Owner): Observable<Owner> {
     return this.http.post<Owner>(this.entityUrl, owner)
       .pipe(
