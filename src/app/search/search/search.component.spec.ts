@@ -19,7 +19,7 @@ describe('SearchComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create searchCompnent', () => {
     expect(component).toBeTruthy();
   });
 });
