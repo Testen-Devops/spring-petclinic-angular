@@ -21,10 +21,10 @@ it('should add related to a vet and show all visits of vet', () => {
     cy.get('tbody').within($tbody => {
       cy.get('tr').last().within($tr => {
         cy.get('td')
-          .last()
+          .first()
             .should('contain','2005/01/06')
         cy.get('td')
-          .last()
+          .eq(1)
             .should('contain','Some description for testing')
       } )
     })

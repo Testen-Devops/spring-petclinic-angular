@@ -16,13 +16,15 @@
           <tr>
             <td>
               <div class="search_result" *ngFor="let owner of foundOwners">
-                <h3 class="search_title">{{owner.firstName}} {{owner.lastName}}</h3>
+                <h3 class="search_title"><a routerLink="/owners/{{owner.id}}" routerLinkActive="active"
+                  (click)="onSelectOwner(owner.id)">{{ owner.firstName + ' ' + owner.lastName }}</a></h3>
               </div>
             </td>
             <td>
               <div class="search_result" *ngFor="let pet of foundPets">
                 <h3 class="search_title">{{pet.name}}</h3>
-                <span>Owner: {{pet.owner.firstName}} {{pet.owner.lastName}}</span>
+                <span>Owner: <a routerLink="/owners/{{pet.owner.id}}" routerLinkActive="active"
+                  (click)="onSelectOwner(pet.owner.id)">{{ pet.owner.firstName + ' ' + pet.owner.lastName }}</a></span>
               </div>
             </td>
             <td>
@@ -30,7 +32,8 @@
                 <h3 class="search_title">{{visit.date}}</h3>
                 <p>Description: {{visit.description}}</p>
                 <p>Pet: {{visit.pet.name}}</p>
-                <p>Owner: {{visit.pet.owner.firstName}} {{visit.pet.owner.lastName}}</p>
+                <p>Owner: <a routerLink="/owners/{{visit.pet.owner.id}}" routerLinkActive="active"
+                  (click)="onSelectOwner(visit.pet.owner.id)">{{ visit.pet.owner.firstName + ' ' + visit.pet.owner.lastName }}</a></p>
               </div>
             </td>
             <!-- <td ><a  routerLink="/owners/{{result.id}}"  routerLinkActive="active">{{ result.name }}</a></td>
